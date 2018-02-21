@@ -1,0 +1,436 @@
+{
+    "available": true,
+    "checkpointable": false,
+    "defaultMaxRunTime": "47:56:00",
+    "defaultNodeCount": 1,
+    "defaultQueue": "normal",
+    "deploymentPath": "gzynda/applications/gzynda-trinity-2.5.1",
+    "deploymentSystem": "data.iplantcollaborative.org",
+    "executionSystem": "tacc-wrangler-gzynda",
+    "executionType": "HPC",
+    "helpURI": "https://pods.iplantcollaborative.org/wiki/display/DEapps/Trinity-64GB-2.1.1",
+    "id": "gzynda-trinity-2.5.1",
+    "inputs": [
+        {
+            "details": {
+                "argument": " --left ",
+                "description": "Accepts: fasta, fastq, gz",
+                "label": "Left sequence library read file",
+                "repeatArgument": false,
+                "showArgument": true
+            },
+            "id": "left",
+            "semantics": {
+                "fileTypes": [
+                    "fastq-0",
+                    "fasta-0"
+                ],
+                "maxCardinality": 1,
+                "minCardinality": 1,
+                "ontology": [
+                    "http://sswapmeet.sswap.info/mime/application/X-fasta",
+                    "http://sswapmeet.sswap.info/mime/application/X-fastq"
+                ]
+            },
+            "value": {
+                "default": "",
+                "enquote": false,
+                "order": 1,
+                "required": false,
+                "validator": null,
+                "visible": true
+            }
+        },
+        {
+            "details": {
+                "argument": " --right ",
+                "description": "Accepts: fasta, fastq, gz",
+                "label": "Right sequence library read file (pair with Left file)",
+                "repeatArgument": false,
+                "showArgument": true
+            },
+            "id": "right",
+            "semantics": {
+                "fileTypes": [
+                    "fastq-0",
+                    "fasta-0"
+                ],
+                "maxCardinality": 1,
+                "minCardinality": 1,
+                "ontology": [
+                    "http://sswapmeet.sswap.info/mime/application/X-fasta",
+                    "http://sswapmeet.sswap.info/mime/application/X-fastq"
+                ]
+            },
+            "value": {
+                "default": "",
+                "enquote": false,
+                "order": 2,
+                "required": false,
+                "validator": null,
+                "visible": true
+            }
+        },
+        {
+            "details": {
+                "argument": " --single ",
+                "description": "Accepts: fasta, fastq, gz",
+                "label": "Single-end seq file. DO NOT supply if you have paired-data.",
+                "repeatArgument": false,
+                "showArgument": true
+            },
+            "id": "single",
+            "semantics": {
+                "fileTypes": [
+                    "fastq-0",
+                    "fasta-0"
+                ],
+                "maxCardinality": 1,
+                "minCardinality": 1,
+                "ontology": [
+                    "http://sswapmeet.sswap.info/mime/application/X-fasta",
+                    "http://sswapmeet.sswap.info/mime/application/X-fastq"
+                ]
+            },
+            "value": {
+                "default": "",
+                "enquote": false,
+                "order": 3,
+                "required": false,
+                "validator": null,
+                "visible": true
+            }
+        },
+        {
+            "details": {
+                "argument": " --genome_guided_bam ",
+                "description": "bam file input",
+                "label": "Genome-guided bam file (coordinate sorted)",
+                "repeatArgument": false,
+                "showArgument": true
+            },
+            "id": "genome_guided_bam",
+            "semantics": {
+                "fileTypes": [
+                    "bam-0"
+                ],
+                "maxCardinality": 1,
+                "minCardinality": 1,
+                "ontology": [
+                    "http://sswapmeet.sswap.info/mime/application/X-bam"
+                ]
+            },
+            "value": {
+                "default": "",
+                "enquote": false,
+                "order": 4,
+                "required": false,
+                "validator": null,
+                "visible": true
+            }
+        }
+    ],
+    "isPublic": false,
+    "label": "Trinity",
+    "longDescription": "Transcript assembler for short reads, 128 GB ram",
+    "modules": [
+        "load trinityrnaseq/2.5.1"
+    ],
+    "name": "gzynda-trinity",
+    "ontology": [
+        "http://sswapmeet.sswap.info/sequenceServices/SequenceServices",
+        "http://edamontology.org/operation_3258",
+        "http://edamontology.org/topic_3170"
+    ],
+    "owner": "gzynda",
+    "parallelism": "SERIAL",
+    "parameters": [
+        {
+            "details": {
+                "argument": " --KMER_SIZE ",
+                "description": null,
+                "label": "kmer length to use (max=32)",
+                "repeatArgument": false,
+                "showArgument": true
+            },
+            "id": "KMER_SIZE",
+            "semantics": {
+                "maxCardinality": 1,
+                "minCardinality": 0,
+                "ontology": [
+                    "xs:integer"
+                ]
+            },
+            "value": {
+                "default": 25,
+                "enquote": false,
+                "order": 1,
+                "required": false,
+                "type": "number",
+                "validator": "^([0-9]|[012][0-9]|3[012])$",
+                "visible": true
+            }
+        },
+        {
+            "details": {
+                "argument": " --seqType ",
+                "description": null,
+                "label": "File type of reads: (fq or fa)",
+                "repeatArgument": false,
+                "showArgument": true
+            },
+            "id": "seqType",
+            "semantics": {
+                "maxCardinality": 1,
+                "minCardinality": 1,
+                "ontology": [
+                    "xs:string"
+                ]
+            },
+            "value": {
+                "default": "fq",
+                "enquote": false,
+                "enum_values": [
+                    {
+                        "fq": "fastq"
+                    },
+                    {
+                        "fa": "fasta"
+                    }
+                ],
+                "order": 2,
+                "required": true,
+                "type": "enumeration",
+                "visible": true
+            }
+        },
+        {
+            "details": {
+                "argument": " --SS_lib_type ",
+                "description": "Trinity performs best with strand-specific data, in which case sense and antisense transcripts can be resolved.",
+                "label": "Optional strand-specific library type",
+                "repeatArgument": false,
+                "showArgument": true
+            },
+            "id": "SS_lib_type",
+            "semantics": {
+                "maxCardinality": 1,
+                "minCardinality": 0,
+                "ontology": [
+                    "xs:string"
+                ]
+            },
+            "value": {
+                "default": "",
+                "enquote": false,
+                "enum_values": [
+                    {
+                        "": "Not strand specific"
+                    },
+                    {
+                        "FR": "PE forward-reverse"
+                    },
+                    {
+                        "RF": "PE reverse-forward"
+                    },
+                    {
+                        "F": "SE forward"
+                    },
+                    {
+                        "R": "SE reverse"
+                    }
+                ],
+                "order": 3,
+                "required": false,
+                "type": "enumeration",
+                "visible": true
+            }
+        },
+        {
+            "details": {
+                "argument": " --min_contig_length ",
+                "description": null,
+                "label": "Minimum assembled contig length to report",
+                "repeatArgument": false,
+                "showArgument": true
+            },
+            "id": "min_contig_length",
+            "semantics": {
+                "maxCardinality": 1,
+                "minCardinality": 0,
+                "ontology": [
+                    "xs:integer"
+                ]
+            },
+            "value": {
+                "default": 200,
+                "enquote": false,
+                "order": 4,
+                "required": false,
+                "type": "number",
+                "validator": "[0-9]+",
+                "visible": true
+            }
+        },
+        {
+            "details": {
+                "argument": " --min_kmer_cov ",
+                "description": null,
+                "label": "Minimum count for K-mers to be assembled by Inchworm",
+                "repeatArgument": false,
+                "showArgument": true
+            },
+            "id": "min_kmer_cov",
+            "semantics": {
+                "maxCardinality": 1,
+                "minCardinality": 0,
+                "ontology": [
+                    "xs:integer"
+                ]
+            },
+            "value": {
+                "default": 1,
+                "order": 5,
+                "enquote": false,
+                "required": false,
+                "type": "number",
+                "validator": "[0-9]+",
+                "visible": true
+            }
+        },
+        {
+            "details": {
+                "argument": " --group_pairs_distance ",
+                "description": "Reads outside this distance are treated as single-end",
+                "label": "Maximum length expected between fragment pairs",
+                "repeatArgument": false,
+                "showArgument": true
+            },
+            "id": "group_pairs_distance",
+            "semantics": {
+                "maxCardinality": 1,
+                "minCardinality": 0,
+                "ontology": [
+                    "xs:integer"
+                ]
+            },
+            "value": {
+                "default": 500,
+                "enquote": false,
+                "order": 6,
+                "required": false,
+                "type": "number",
+                "validator": "[0-9]+",
+                "visible": true
+            }
+        },
+        {
+            "details": {
+                "argument": " --trimmomatic ",
+                "description": null,
+                "label": "Run Trimmomatic to quality trim reads",
+                "repeatArgument": false,
+                "showArgument": true
+            },
+            "id": "trimmomatic",
+            "value": {
+                "default": false,
+                "order": 7,
+                "enquote": false,
+                "required": false,
+                "type": "flag",
+                "visible": true
+            }
+        },
+        {
+            "details": {
+                "argument": " --genome_guided_max_intron ",
+                "description": "Also maximum fragment span on genome",
+                "label": "Genome-guided Assembly - Maximum allowed intron length",
+                "repeatArgument": false,
+                "showArgument": true
+            },
+            "id": "gg_max_intron",
+            "semantics": {
+                "maxCardinality": 1,
+                "minCardinality": 0,
+                "ontology": [
+                    "xs:integer"
+                ]
+            },
+            "value": {
+                "default": 10000,
+                "enquote": false,
+                "order": 8,
+                "required": false,
+                "type": "number",
+                "validator": "[0-9]+",
+                "visible": true
+            }
+        },
+        {
+            "details": {
+                "argument": " --genome_guided_min_coverage ",
+                "description": null,
+                "label": "Genome-guided Assembly - Minimum read coverage for identifying an expressed region of the genome",
+                "repeatArgument": false,
+                "showArgument": true
+            },
+            "id": "gg_min_coverage",
+            "semantics": {
+                "maxCardinality": 1,
+                "minCardinality": 0,
+                "ontology": [
+                    "xs:integer"
+                ]
+            },
+            "value": {
+                "default": 1,
+                "enquote": false,
+                "order": 9,
+                "required": false,
+                "type": "number",
+                "validator": "[0-9]+",
+                "visible": true
+            }
+        },
+        {
+            "details": {
+                "argument": " --genome_guided_min_reads_per_partition ",
+                "description": null,
+                "label": "Genome-guided Assembly - Minimum number of reads per partition",
+                "repeatArgument": false,
+                "showArgument": true
+            },
+            "id": "gg_min_reads_per_partition",
+            "semantics": {
+                "maxCardinality": 1,
+                "minCardinality": 0,
+                "ontology": [
+                    "xs:integer"
+                ]
+            },
+            "value": {
+                "default": 10,
+                "enquote": false,
+                "order": 10,
+                "required": false,
+                "type": "number",
+                "validator": "[0-9]+",
+                "visible": true
+            }
+        }
+    ],
+    "shortDescription": "Trinity, the transcript assembler",
+    "tags": [
+        "next-gen",
+        "NGS",
+        "transcriptome assembly",
+        "gene expression",
+        "assembler",
+        "rnaseq"
+    ],
+    "templatePath": "trinity.sh",
+    "testPath": "trinity.sh",
+    "version": "2.5.1"
+}

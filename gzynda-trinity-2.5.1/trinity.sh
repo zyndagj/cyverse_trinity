@@ -11,7 +11,7 @@ function cleanup() {
 	#\ls trinity_out_dir/*{fa,fasta,sam} | xargs -n 1 -P $NCORES gzip -4
 	for f in trinity_out_dir/*{fa,fasta,sam}; do [ -e $f ] && echo $f; done | xargs -n 1 -P $NCORES gzip -4
 	# Move assembly fasta to run directory
-	[ -e Trinity.fasta.gz ] && mv trinity_out_dir/Trinity.fasta.gz .
+	target=trinity_out_dir/Trinity.fasta.gz; [ -e $target ] && mv $target .
 	# Tar Trinity directory
 	[ -e trinity_out_dir ] && ( tar -cf trinity_out_dir.tar trinity_out_dir && rm -rf trinity_out_dir )
 }
@@ -45,6 +45,11 @@ function formatFile {
 		mv ${tmpFile} ${inFile}
 	fi
 }
+export JAVABIN=$(which java)
+function java {
+	timeout 30m ${JAVABIN} $@;
+}
+export -f java
 
 ###############################################################
 # Inputs
